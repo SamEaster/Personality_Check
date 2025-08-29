@@ -1,5 +1,5 @@
 from flask import Flask,  request, jsonify
-from model import model
+from main import model
 import os
 
 
