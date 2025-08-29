@@ -1,5 +1,5 @@
 from flask import Flask,  request, jsonify
-from main import model
+from main import final_model
 import os
 
 
@@ -31,7 +31,11 @@ def process_personality():
         personal_data = [Time_spent_Alone, Stage_fear, Social_event_attendance, Going_outside, Drained_after_socializing, Friends_circle_size, Post_frequency]
         try:
             json_data = model(personal_data)
-            return jsonify({'True_Score': json_data})
+            if json_data:
+                presonality = "Introvert"
+            else:
+                presonality = "Extrovert"
+            return jsonify({'Personality': presonality})
     
         except Exception as e:
             return jsonify({'error': str(e)}), 500
@@ -52,8 +56,13 @@ def process_personality():
     results = []
     try:
         json_data = model(personal_data)
+        if json_data:
+                presonality = "Introvert"
+            else:
+                presonality = "Extrovert"
+                
         results.append({
-            'True_Score':json_data,
+            'Personality':presonality,
         })
             
     except Exception as e:
