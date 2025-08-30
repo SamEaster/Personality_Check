@@ -1,14 +1,12 @@
 from flask import Flask,  request, jsonify
-from main import final_model
+import joblib
+import numpy
 import os
 
 
+model = joblib.load('model.pkl')
+
 app = Flask(__name__)
-UPLOAD_FOLDER = './uploads'
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
-ALLOWED_EXTENSIONS = {'pdf'}
-
 @app.route('/', methods=['GET'])
 def welcome():
     return "You are ON Server"
@@ -30,7 +28,8 @@ def process_personality():
 
         personal_data = [Time_spent_Alone, Stage_fear, Social_event_attendance, Going_outside, Drained_after_socializing, Friends_circle_size, Post_frequency]
         try:
-            json_data = model(personal_data)
+            personal_data = np.array(personal_data).reshape(-1, 1)
+            json_data = model.predict(personal_data)
             if json_data:
                 presonality = "Introvert"
             else:
@@ -55,7 +54,9 @@ def process_personality():
 
     results = []
     try:
-        json_data = model(personal_data)
+        personal_data = np.array(personal_data).reshape(-1, 1)
+        json_data = model.predict(personal_data)
+        
         if json_data:
             presonality = "Introvert"
             
