@@ -57,9 +57,10 @@ def process_personality():
     try:
         json_data = model(personal_data)
         if json_data:
-                presonality = "Introvert"
-            else:
-                presonality = "Extrovert"
+            presonality = "Introvert"
+            
+        else:
+            presonality = "Extrovert"
                 
         results.append({
             'Personality':presonality,
