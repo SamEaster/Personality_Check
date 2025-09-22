@@ -1,19 +1,18 @@
-This all started with a challenge I found on Kaggle called "Predict the Introverts from the Extroverts." It felt like a fascinating puzzle to solve. The dataset was real and messy, as data often is, with plenty of missing values that needed careful handling.
+This all started with a challenge I found on Kaggle called "Predict the Introverts from the Extroverts." The competition was competetive as  dataset was real and messy, as data often is, with plenty of missing values that needed careful handling.
 
-My approach involved a few key steps:
+# My approach involved a few key steps:
 
-Cleaning the Data: First, I worked on thoughtfully filling in the missing gaps using various imputation techniques. It's like being a detective, trying to figure out what the data would say if it were complete.
+First, I worked on filling in the missing gaps using various imputation techniques. Like KNN Imputer and Iterative Imputer.
 
-Finding the Right Model: I experimented with different ways of combining machine learning models, a technique known as "Stacking." The idea is that by having several models work together, they can often make a more accurate prediction than any single model on its own.
+I experimented with different ways of combining machine learning models, a technique known as "Stacking." The idea is that by having several models work together, they can often make a more accurate prediction than any single model on its own.
 
-A Proud Result: After a lot of tweaking and testing, I was thrilled to land on a model that achieved 96.84% accuracy, placing 12th in the competition!
+After a lot of tweaking and testing, I was thrilled to land on a model that achieved 96.84% accuracy, placing 12th in the competition!
 
-Bringing the Model to Life
-A model is just a file on a computer until people can actually use it. To make this project accessible to everyone, I built a simple web application.
+# Deploying the model
+After building the model it thought I should try model deploying, but as I am new to deployment I don't have much knowledge about WebDev tech stack so I choose the basic libraries like. 
+Flask, a lightweight Python framework, to handle the backend logic.
 
-I used Flask, a lightweight Python framework, to handle the backend logic.
-
-The front-end is a clean and simple interface built with HTML and styled with Tailwind CSS.
+I kept front-end clean and simple interface built with HTML and styled with Tailwind CSS.
 
 Finally, I wrapped the entire application in a Docker container and deployed it on Render, so you can try it out with just a click.
 
