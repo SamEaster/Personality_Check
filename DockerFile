@@ -1,0 +1,36 @@
+FROM python:3.10-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Create a non-root user
+RUN adduser --disabled-password --gecos '' appuser
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements file and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Switch to the non-root user
+USER appuser
+
+# Copy the entire project directory into the container
+COPY . .
+
+# Django-specific commands for production
+# Collect static files (e.g., your model.pkl, CSS, JS) into a single directory
+RUN python manage.py collectstatic --noinput
+
+# The original prompt did not include a database, so the migrate command is commented out.
+# If you add a database later, you should uncomment the following line:
+# RUN python manage.py migrate
+
+# Expose the port Gunicorn will run on
+EXPOSE 8000
+
+# Use Gunicorn to run the Django application.
+# Replace 'personality_project.wsgi:application' with '<your_project_name>.wsgi:application'
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "personality.wsgi:application"]
